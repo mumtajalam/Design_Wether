@@ -45,10 +45,12 @@ const CurrentWether = () => {
   });
 
   const handlesearch = async () => {
-    const url = `http://api.weatherstack.com/current?access_key=55010527852df24af5e813c848ae927c&query=${cityname}`;
-    const response = await axios.get(url);
-    console.log(response.data);
-    setData(response.data);
+    if (cityname !== undefined || null) {
+      const url = `http://api.weatherstack.com/current?access_key=810e7fc9e04524fbed8e9455eccdb33f&query=${cityname}`;
+      const response = await axios.get(url);
+      console.log(response.data);
+      setData(response.data);
+    }
   };
   return (
     <div>
