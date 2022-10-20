@@ -1,55 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const CurrentWether = () => {
   const [cityname, setCityName] = useState("");
   const now = new Date();
-  const [data, setData] = useState({
-    request: {
-      type: "City",
-      query: "Mumbai, India",
-      language: "en",
-      unit: "m",
-    },
-    location: {
-      name: "Mumbai",
-      country: "India",
-      region: "Maharashtra",
-      lat: "18.975",
-      lon: "72.826",
-      timezone_id: "Asia/Kolkata",
-      localtime: "2022-10-20 17:05",
-      localtime_epoch: 1666285500,
-      utc_offset: "5.50",
-    },
-    current: {
-      observation_time: "11:35 AM",
-      temperature: 31,
-      weather_code: 143,
-      weather_icons: [
-        "https://cdn.worldweatheronline.com/images/wsymbols01_png_64/wsymbol_0006_mist.png",
-      ],
-      weather_descriptions: ["Haze"],
-      wind_speed: 17,
-      wind_degree: 280,
-      wind_dir: "W",
-      pressure: 1008,
-      precip: 0,
-      humidity: 75,
-      cloudcover: 50,
-      feelslike: 37,
-      uv_index: 7,
-      visibility: 4,
-      is_day: "yes",
-    },
-  });
+  const [data, setData] = useState(null);
 
   const handlesearch = async () => {
-    if (cityname !== undefined || null) {
+    if (cityname !== "") {
       const url = `http://api.weatherstack.com/current?access_key=810e7fc9e04524fbed8e9455eccdb33f&query=${cityname}`;
       const response = await axios.get(url);
       console.log(response.data);
       setData(response.data);
+    } else {
+      alert("Please fill correct location");
     }
   };
   return (
