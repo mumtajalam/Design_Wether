@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const CurrentWether = () => {
@@ -12,6 +12,7 @@ const CurrentWether = () => {
       const response = await axios.get(url);
       console.log(response.data);
       setData(response.data);
+      setCityName("");
     } else {
       alert("Please fill correct location");
     }
@@ -23,6 +24,7 @@ const CurrentWether = () => {
           <div className="search d-flex">
             <input
               type="text"
+              value={cityname}
               className="form-control"
               placeholder="location"
               onChange={(e) => {
